@@ -1,0 +1,94 @@
+.login-form {
+  font-size: 2rem;
+  width: 20%;
+  background-color: white;
+  margin: 3rem auto;
+  border-radius: 7px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.form-input-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+.form-label {
+  width: 100%;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.form-input {
+  width: 100%;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: 0;
+}
+.forget-password {
+  font-size: 1rem;
+  margin: 0px 0px 4rem auto;
+  color: black;
+  text-decoration: none;
+}
+
+.form-login-button {
+  font-size: 2rem;
+  width: 100%;
+  border-radius: 20px;
+  color: white;
+  background-image: linear-gradient(to left, #008b8b, #5d148d);
+  cursor: pointer;
+}
+
+.password-hint {
+  font-size: 1rem;
+}
+
+.third-login {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+
+.signup {
+  font-size: 1.5rem;
+  color: black;
+  text-decoration: none;
+}
+
+.form-login-button:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.third-icon:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 450px) {
+  .login-form {
+    width: 80%;
+  }
+}
+@media screen and (min-width: 451px) and (max-width: 800px) {
+  .login-form {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1200px) {
+  .login-form {
+    width: 50%;
+  }
+}
