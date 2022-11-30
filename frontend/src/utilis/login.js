@@ -18,20 +18,12 @@ import axios from "axios";
 //     .catch((err) => err.toString());
 // };
 
-export const login = (username, password) => {
+export const login = (data) => {
   return axios({
     method: "post",
-    baseURL: "/login",
+    url: "http://127.0.0.1:3000/login",
+    // baseURL: "/api/login",
     //API要求的資料
-    data: {
-      username: username,
-      password: password,
-    },
-    proxy: {
-      protocol: "http",
-      host: "127.0.0.1",
-      // hostname: '127.0.0.1' // Takes precedence over 'host' if both are defined
-      port: 3000,
-    },
-  }).then((response) => console.log(response));
+    data: data,
+  });
 };

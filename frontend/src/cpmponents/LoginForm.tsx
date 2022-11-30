@@ -13,7 +13,10 @@ const LoginForm = () => {
 
   const loginClick = () => {
     console.log("button click");
-    login(username, password);
+    console.log(username, password);
+    login({ username, password }).then((res) => {
+      console.log(res);
+    });
   };
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {

@@ -2,9 +2,12 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 // middleware
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json()); //加入這個才解析前端傳來的參數
+app.use(cors());
 
 // request handling
 app.get("/", (req, res) => {
@@ -17,6 +20,11 @@ app.get("/user/:id", (req, res) => {
 
 app.post("/login", (req, res) => {
   console.log(req.body);
+  if (req.body.username) {
+    console.log(`Hello ${req.body.username}`);
+    res.status(200);
+    res.send("ok");
+  }
   console.log("somebody want to login");
 });
 
