@@ -10,13 +10,21 @@ import { login } from "../utilis/login.js";
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const loginClick = () => {
     console.log("button click");
     console.log(username, password);
-    login({ username, password }).then((res) => {
-      console.log(res);
-    });
+    login({ username, password })
+      .then((res) => {
+        if (res.data == "ok") {
+          console.log("navigate !");
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate("/error");
+      });
   };
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {

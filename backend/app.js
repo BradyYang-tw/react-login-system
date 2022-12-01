@@ -7,7 +7,11 @@ const cors = require("cors");
 // middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); //加入這個才解析前端傳來的參數
-app.use(cors());
+app.use(
+  cors({
+    // credentials: true, //设置成true 请求中才会带上cookie信息，否则请求失败
+  })
+);
 
 // request handling
 app.get("/", (req, res) => {
@@ -24,8 +28,10 @@ app.post("/login", (req, res) => {
     console.log(`Hello ${req.body.username}`);
     res.status(200);
     res.send("ok");
+    console.log("somebody want to login");
+  } else {
+    res.status(404).send("error");
   }
-  console.log("somebody want to login");
 });
 
 // routing for all

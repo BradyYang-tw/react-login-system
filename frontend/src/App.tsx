@@ -1,10 +1,10 @@
-import LoginForm from "./cpmponents/LoginForm";
+import Welcome from "./pages/Welcome";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <LoginForm />
+      <Welcome />
     </div>
   );
 }
