@@ -6,6 +6,11 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const User = require("./models/user");
 
+// 使用者加密hash function
+const bcrypt = require("bcrypt");
+const { nextTick } = require("process");
+const saltRounds = 10;
+
 // middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); //加入這個才解析前端傳來的參數
@@ -36,30 +41,49 @@ app.get("/user/:id", (req, res) => {
   res.send("hi " + req.params.id);
 });
 
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res, next) => {
   console.log(req.body);
-  if (req.body.username) {
-    console.log(`Hello ${req.body.username}`);
-    res.status(200);
-    res.send("ok");
-    console.log("somebody want to login");
-  } else {
-    res.status(404).send("error");
+  let { username, password } = req.body;
+  try {
+    let foundUser = await User.findOne({ username });
+    console.log(foundUser);
+    bcrypt.compare(password, foundUser.password, (err, result) => {
+      if (err) {
+        next(err);
+      }
+      if (result) {
+        res.status(200).send("ok");
+      } else {
+        res.status(404).send("error");
+      }
+    });
+  } catch (err) {
+    console.log(err);
   }
 });
 
-app.post("/signup", (req, res) => {
+app.post("/signup", (req, res, next) => {
   let { username, password } = req.body;
-  let newUser = new User({ username, password });
-  newUser
-    .save()
-    .then(() => {
-      console.log("New User");
-      res.status(200).send("ok");
-    })
-    .catch((e) => {
-      console.log(e);
+
+  // 加密
+  bcrypt.genSalt(saltRounds, (err, salt) => {
+    bcrypt.hash(password, salt, (err, hash) => {
+      let newUser = new User({ username, password: hash });
+      try {
+        newUser
+          .save()
+          .then(() => {
+            console.log("New User");
+            res.status(200).send("ok");
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      } catch (err) {
+        next(err);
+      }
     });
+  });
 });
 
 // routing for all
