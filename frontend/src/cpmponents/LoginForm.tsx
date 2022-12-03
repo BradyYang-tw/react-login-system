@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./LoginForm.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Google from "../static/Google.svg";
 import Facebook from "../static/Facebook.svg";
 import github from "../static/github.svg";
@@ -89,9 +89,9 @@ const LoginForm = () => {
 
       <p className="password-hint">or Sign Up Using</p>
 
-      <a className="signup" href="#">
+      <Link className="signup" to="/signup">
         SIGN UP
-      </a>
+      </Link>
     </form>
   );
 };

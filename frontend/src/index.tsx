@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./cpmponents/HomePage";
 import LoginForm from "./cpmponents/LoginForm";
 import Error from "./pages/Error";
+import SignUp from "./pages/SignUp";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
@@ -17,6 +18,7 @@ root.render(
         <Route index path="/login" element={<LoginForm />} />
         <Route path="home" element={<HomePage />} />
         <Route path="/error" element={<Error />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

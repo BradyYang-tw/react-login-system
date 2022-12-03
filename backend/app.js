@@ -2,7 +2,9 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 const cors = require("cors");
+const User = require("./models/user");
 
 // middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -12,6 +14,18 @@ app.use(
     // credentials: true, //设置成true 请求中才会带上cookie信息，否则请求失败
   })
 );
+
+// db connect
+mongoose
+  .connect(
+    `mongodb+srv://brady:1qaz%40WSX@cluster0.dp78dhx.mongodb.net/?retryWrites=true&w=majority`
+  )
+  .then(() => {
+    console.log("Success connect db!");
+  })
+  .catch((e) => {
+    console.log("Fail to connect db", e);
+  });
 
 // request handling
 app.get("/", (req, res) => {
@@ -32,6 +46,20 @@ app.post("/login", (req, res) => {
   } else {
     res.status(404).send("error");
   }
+});
+
+app.post("/signup", (req, res) => {
+  let { username, password } = req.body;
+  let newUser = new User({ username, password });
+  newUser
+    .save()
+    .then(() => {
+      console.log("New User");
+      res.status(200).send("ok");
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 });
 
 // routing for all
