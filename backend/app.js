@@ -5,6 +5,12 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const User = require("./models/user");
+const jwt = require("jsonwebtoken");
+const auth = require("./auth");
+const dotenv = require("dotenv");
+dotenv.config();
+const passport = require("passport");
+require("./passport")(passport);
 
 // 使用者加密hash function
 const bcrypt = require("bcrypt");
@@ -22,9 +28,7 @@ app.use(
 
 // db connect
 mongoose
-  .connect(
-    `mongodb+srv://brady:1qaz%40WSX@cluster0.dp78dhx.mongodb.net/?retryWrites=true&w=majority`
-  )
+  .connect(process.env.DB_CONNECT)
   .then(() => {
     console.log("Success connect db!");
   })
@@ -52,7 +56,21 @@ app.post("/login", async (req, res, next) => {
         next(err);
       }
       if (result) {
-        res.status(200).send("ok");
+        // res.send("ok");
+        const SECRET = "BRADY";
+        const EXPIRES_IN = "1h"; // 10 sec
+        const token = jwt.sign({ user: username }, SECRET, {
+          expiresIn: EXPIRES_IN,
+        });
+        // res.json({
+        //   token,
+        // });
+        res.send({
+          status: 200,
+          message: "登入成功!",
+          token,
+        });
+        // res.cookie("token", token, { maxAge: 60000, httpOnly: true });
       } else {
         res.status(404).send("error");
       }

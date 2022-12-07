@@ -16,8 +16,12 @@ const LoginForm = () => {
     console.log(username, password);
     login({ username, password })
       .then((res) => {
-        if (res.data == "ok") {
+        console.log(res);
+
+        if (res.data.token) {
           console.log("navigate !");
+          // 儲存至local storage
+          localStorage.setItem("token", res.data.token);
           navigate("/");
         }
       })
