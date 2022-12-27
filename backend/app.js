@@ -11,6 +11,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const passport = require("passport");
 require("./passport")(passport);
+const authRoute = require("./routes/auth-route.js");
 
 // 使用者加密hash function
 const bcrypt = require("bcrypt");
@@ -25,6 +26,7 @@ app.use(
     // credentials: true, //设置成true 请求中才会带上cookie信息，否则请求失败
   })
 );
+app.use("/auth", authRoute);
 
 // db connect
 mongoose
@@ -109,6 +111,6 @@ app.get("*", (req, res) => {
   res.send("Cnanot find what you want!");
 });
 
-app.listen(3000, () => {
+app.listen(8080, () => {
   console.log("Server is running on port 3000");
 });
