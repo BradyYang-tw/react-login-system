@@ -14,21 +14,21 @@ const LoginForm = () => {
   const loginClick = () => {
     console.log("button click");
     console.log(username, password);
-    login({ username, password })
-      .then((res) => {
-        console.log(res);
+    // login({ username, password })
+    //   .then((res) => {
+    //     console.log(res);
 
-        if (res.data.token) {
-          console.log("navigate !");
-          // 儲存至local storage
-          localStorage.setItem("token", res.data.token);
-          navigate("/");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        navigate("/error");
-      });
+    //     if (res.data.token) {
+    //       console.log("navigate !");
+    //       // 儲存至local storage
+    //       localStorage.setItem("token", res.data.token);
+    //       navigate("/");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     navigate("/error");
+    //   });
   };
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {

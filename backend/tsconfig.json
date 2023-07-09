@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "commonjs",
+      "strict": true,
+      "sourceMap": true,
+      "moduleResolution": "node",
+      "outDir": "dist",
+      "esModuleInterop": true,
+      "noImplicitAny": false,
+      "strictPropertyInitialization": false,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "baseUrl": ".",
+      "paths": {
+        "@project/*": ["src/*"]
+      }
+    },
+    "include": [".eslintrc.js","src/**/*.ts"],
+    "exclude": ["node_modules"]
+  }
