@@ -31,3 +31,22 @@
 
 // const User = mongoose.model("User", userSchema);
 // module.exports = User;
+
+import { User } from '../entities/user.entity';
+import {UserConfig} from '../utilities/interface/user';
+import { connectionSource } from "../config/psqlConfig"
+
+async function add(userData: UserConfig) {
+    const user = new User();
+    Object.assign(user, userData);
+    await connectionSource.manager.save(user)
+}
+
+async function getById(id: number) {
+    return User.findOneByOrFail({ id });
+}
+
+export default {
+    add,
+    getById,
+};

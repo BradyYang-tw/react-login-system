@@ -3,11 +3,11 @@ export interface UserConfig {
      * Name
      * @example "Brady"
      */
-    name: string;
+    Username: string;
     /**
      * email address
      * @example abc@xx.com
      */
-    email: string;
+    Password: string;
   
   }

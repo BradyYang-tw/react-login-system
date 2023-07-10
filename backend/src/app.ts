@@ -1,5 +1,5 @@
 import express from "express";
-// import routes from './routes';
+import routes from './routes';
 // import {RegisterRoutes} from '../build/routes';
 import cors from "cors";
 // import {errors} from 'celebrate';
@@ -18,6 +18,7 @@ connectionSource
   });
 
 const app = express();
+
 // const path = require("path");
 // const mongoose = require("mongoose");
 // const User = require("./models/user");
@@ -34,14 +35,15 @@ const app = express();
 // const { nextTick } = require("process");
 // const saltRounds = 10;
 
-// // middleware
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json()); //加入這個才解析前端傳來的參數
-// app.use(
-//   cors({
-//     // credentials: true, //设置成true 请求中才会带上cookie信息，否则请求失败
-//   })
-// );
+// middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json()); //加入這個才解析前端傳來的參數
+app.use(
+  cors({
+    // credentials: true, //设置成true 请求中才会带上cookie信息，否则请求失败
+  })
+);
+app.use('/api', routes)
 // app.use("/auth", authRoute);
 
 // // db connect
