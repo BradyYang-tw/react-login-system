@@ -12,7 +12,8 @@
     "migrate:create": "npm run typeorm migration:create ./src/migration/brady",
     "migrate:generate": "npm run typeorm migration:generate src/migration/brady  ",
     "migrate:up": "npm run typeorm migration:run",
-    "migrate:down": "npm run typeorm migration:revert"
+    "migrate:down": "npm run typeorm migration:revert",
+    "build": "tsoa spec-and-routes && tsc"
   },
   "keywords": [],
   "author": "",
@@ -28,7 +29,9 @@
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
     "pg": "^8.11.1",
+    "swagger-ui-express": "^5.0.0",
     "ts-node": "^10.9.1",
+    "tsoa": "^5.1.1",
     "typeorm": "^0.3.17"
   },
   "devDependencies": {

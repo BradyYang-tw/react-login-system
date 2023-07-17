@@ -3,7 +3,7 @@ import express, { Router } from 'express';
 // import { isAuthorized } from '../middleware/passport';
 // import validate from '../validations/user.validation';
 // import {UserController} from '../controllers/user.controller';
-import UserController from '../controllers/user.controller';
+import {UserController} from '../controllers/user.controller';
 
 const router: Router = express.Router();
 // router.param('id', ctrl.load);

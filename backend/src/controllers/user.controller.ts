@@ -1,18 +1,19 @@
-// import {
-//     Route,
-//     Tags,
-//     Controller,
-//     Path,
-//     Body,
-//     Get,
-//     Post,
-//     Put,
-//     Delete,
-//     SuccessResponse,
-//   } from 'tsoa';
-import { Request, Response } from 'express';
-import UserService from '../services/user.service';
-import {UserConfig} from '../utilities/interface/user';
+import {
+  Route,
+  Tags,
+  Controller,
+  Path,
+  Body,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Query,
+  SuccessResponse,
+} from "tsoa";
+import { Request, Response } from "express";
+import UserService from "../services/user.service";
+import { UserConfig } from "../utilities/interface/user";
 
 // @Route('/api/users')
 // @Tags('User')
@@ -36,17 +37,16 @@ import {UserConfig} from '../utilities/interface/user';
 // }
 
 const service = new UserService();
-export default class UserController {
-  public async add(req: Request, res: Response) {
-    console.log(req.params);
-    const { Username, Password } = req.body;
-    const userData = { Username, Password };
-    console.log('controller', userData);
- 
-    res.json(await service.add(userData));
+@Route("users")
+export class UserController extends Controller {
+  @Post()
+  public async add(@Body() requestBody:UserConfig) {
+    this.setStatus(201); // set return status 201
+    await service.add(requestBody);
+    return;
   }
-
-  public async get(req: Request, res: Response) {
-    res.json(await service.get(1));
+  @Get("{userId}")
+  public async get(@Path() userId: number) {
+    return service.get(userId);
   }
 }

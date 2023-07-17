@@ -5,7 +5,9 @@ import cors from "cors";
 // import {errors} from 'celebrate';
 // import errorHandler from './errorHandler';
 const bodyParser = require("body-parser");
-
+import { RegisterRoutes } from "../build/routes";
+import * as swaggerUI from "swagger-ui-express";
+import * as swaggerJson from "../build/swagger.json";
 // psql datasource
 import { connectionSource } from "./config/psqlConfig";
 connectionSource
@@ -128,12 +130,13 @@ app.use('/api', routes)
 app.get("/health", (req, res) => {
   return res.send("I am Good");
 });
+
+RegisterRoutes(app);
+app.use(["/openapi", "/docs", "/swagger"], swaggerUI.serve, swaggerUI.setup(swaggerJson));
+
 // routing for all
 app.get("*", (req, res) => {
   res.send("Cnanot find what you want!");
 });
-
 const port = 3000;
-
-// RegisterRoutes(app);
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
