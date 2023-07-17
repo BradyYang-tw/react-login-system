@@ -1,16 +1,21 @@
 import UserModel  from '../models/user.model';
 import {UserConfig} from '../utilities/interface/user';
 
-async function add(userData: UserConfig) {
-    console.log('service', userData)
-    return UserModel.add(userData);
+const model = new UserModel()
+export default class UserService {
+    public async add(userData: UserConfig) {
+        console.log('service', userData)
+        return model.add(userData);
+    }
+    
+    public async get(id: number) {
+        return model.getById(id);
+    }
+
 }
 
-async function get(id: number) {
-    return UserModel.getById(id);
-}
 
-export default {
-    add,
-    get,
-};
+// export default {
+//     add,
+//     get,
+// };

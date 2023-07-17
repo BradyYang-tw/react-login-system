@@ -35,21 +35,18 @@ import {UserConfig} from '../utilities/interface/user';
 
 // }
 
-
-async function add(req: Request, res: Response) {
+const service = new UserService();
+export default class UserController {
+  public async add(req: Request, res: Response) {
     console.log(req.params);
     const { Username, Password } = req.body;
     const userData = { Username, Password };
     console.log('controller', userData);
  
-    res.json(await UserService.add(userData));
-}
+    res.json(await service.add(userData));
+  }
 
-async function get(req: Request, res: Response) {
-  res.json(await UserService.get(1));
+  public async get(req: Request, res: Response) {
+    res.json(await service.get(1));
+  }
 }
-
-export default {
-    add,
-    get,
-};

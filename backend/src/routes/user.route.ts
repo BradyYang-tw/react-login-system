@@ -8,13 +8,15 @@ import UserController from '../controllers/user.controller';
 const router: Router = express.Router();
 // router.param('id', ctrl.load);
 
+const controller = new UserController();
+
 router.route('/').get(function (req, res, next) {
     res.send('Hello World!');
     res.end();
 })
 // router.route('/').post(isAuthorized, celebrate(validate.add), UserController.add);
 router.route('/').post(
-   UserController.add
+    controller.add
 );
 // router.route('/:id').get(UserController.get)
 // router.route('/').post(isAuthorized, celebrate(validate.add), UserController.prototype.add);

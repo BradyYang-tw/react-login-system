@@ -36,17 +36,21 @@ import { User } from '../entities/user.entity';
 import {UserConfig} from '../utilities/interface/user';
 import { connectionSource } from "../config/psqlConfig"
 
-async function add(userData: UserConfig) {
-    const user = new User();
-    Object.assign(user, userData);
-    await connectionSource.manager.save(user)
+export default class UserModel {
+    public async add(userData: UserConfig) {
+        const user = new User();
+        Object.assign(user, userData);
+        await connectionSource.manager.save(user)
+    }
+
+    public async getById(id: number) {
+        return User.findOneByOrFail({ id });
+    }
+
 }
 
-async function getById(id: number) {
-    return User.findOneByOrFail({ id });
-}
 
-export default {
-    add,
-    getById,
-};
+// export default {
+//     add,
+//     getById,
+// };
