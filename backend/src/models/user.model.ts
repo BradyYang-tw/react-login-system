@@ -46,6 +46,7 @@ export default class UserModel {
     public async getUsers() {
         return User.find({
             select: {
+                id: true,
                 Username: true,
                 Password: true,
             },
@@ -57,9 +58,3 @@ export default class UserModel {
     }
 
 }
-
-
-// export default {
-//     add,
-//     getById,
-// };

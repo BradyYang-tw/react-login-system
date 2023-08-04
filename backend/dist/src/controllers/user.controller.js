@@ -47,10 +47,10 @@ let UserController = exports.UserController = class UserController extends tsoa_
     async getUsers() {
         return service.getUsers();
     }
-    async getById() {
-        // @Path() id: number,
+    async getById(userId) {
         // @Query() Username?: string
-        return service.getUsers();
+        console.log('id', userId);
+        return service.getUserById(userId);
     }
 };
 __decorate([
@@ -70,8 +70,9 @@ __decorate([
     (0, tsoa_1.SuccessResponse)("200", "Success Retrive") // Custom success response
     ,
     (0, tsoa_1.Get)("{userId}"),
+    __param(0, (0, tsoa_1.Path)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getById", null);
 exports.UserController = UserController = __decorate([

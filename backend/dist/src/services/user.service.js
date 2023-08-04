@@ -16,7 +16,15 @@ class UserService {
         return model.getUsers();
     }
     async getUserById(id) {
-        return model.getById(id);
+        const userData = await model.getById(id);
+        // base64 decode
+        // 將 base64 字串轉換成 Buffer
+        // console.log(userData.Password);
+        // const buffer = Buffer.from(userData.Password, 'base64');
+        // // 將 Buffer 轉換成原始的字串
+        // const decodedString = buffer.toString('utf-8');
+        // userData.Password = decodedString; 
+        return userData;
     }
 }
 exports.default = UserService;

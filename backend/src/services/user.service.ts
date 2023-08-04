@@ -15,7 +15,16 @@ export default class UserService {
     }
 
     public async getUserById(id: number) {
-        return model.getById(id);
+        const userData = await model.getById(id);
+        
+        // base64 decode
+        // 將 base64 字串轉換成 Buffer
+        const buffer = Buffer.from(userData.Password, 'base64');
+
+        // 將 Buffer 轉換成原始的字串
+        const decodedString = buffer.toString('utf-8');
+        userData.Password = decodedString; 
+        return userData;
     }
 
 }

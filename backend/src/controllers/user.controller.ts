@@ -52,7 +52,7 @@ export class UserController extends Controller {
   @SuccessResponse("200", "Success Retrive") // Custom success response
 
   @Get("{userId}")
-  public async getById(@Path() userId: number,): Promise<UserConfig> {
+  public async getById(@Path() userId: number): Promise<UserConfig> {
     // @Query() Username?: string
     return service.getUserById(userId);
   }

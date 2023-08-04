@@ -42,6 +42,7 @@ class UserModel {
     async getUsers() {
         return user_entity_1.User.find({
             select: {
+                id: true,
                 Username: true,
                 Password: true,
             },
@@ -52,8 +53,4 @@ class UserModel {
     }
 }
 exports.default = UserModel;
-// export default {
-//     add,
-//     getById,
-// };
 //# sourceMappingURL=user.model.js.map
