@@ -27,15 +27,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const routes_1 = __importDefault(require("./routes"));
-// import {RegisterRoutes} from '../build/routes';
+//import routes from './routes'; // import自己寫的route
 const cors_1 = __importDefault(require("cors"));
 // import {errors} from 'celebrate';
 // import errorHandler from './errorHandler';
 const bodyParser = require("body-parser");
-const routes_2 = require("build/routes");
+const routes_1 = require("../build/routes");
 const swaggerUI = __importStar(require("swagger-ui-express"));
-const swaggerJson = __importStar(require("build/swagger.json"));
+const swaggerJson = __importStar(require("../build/swagger.json"));
 // psql datasource
 const psqlConfig_1 = require("./config/psqlConfig");
 psqlConfig_1.connectionSource
@@ -67,7 +66,7 @@ app.use(bodyParser.json()); //加入這個才解析前端傳來的參數
 app.use((0, cors_1.default)({
 // credentials: true, //设置成true 请求中才会带上cookie信息，否则请求失败
 }));
-app.use('/api', routes_1.default);
+// app.use('/api', routes)
 // app.use("/auth", authRoute);
 // // db connect
 // mongoose
@@ -145,12 +144,12 @@ app.use('/api', routes_1.default);
 app.get("/health", (req, res) => {
     return res.send("I am Good");
 });
+(0, routes_1.RegisterRoutes)(app);
+app.use(["/openapi", "/docs", "/swagger"], swaggerUI.serve, swaggerUI.setup(swaggerJson));
 // routing for all
 app.get("*", (req, res) => {
     res.send("Cnanot find what you want!");
 });
 const port = 3000;
-(0, routes_2.RegisterRoutes)(app);
-app.use(["/openapi", "/docs", "/swagger"], swaggerUI.serve, swaggerUI.setup(swaggerJson));
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 //# sourceMappingURL=app.js.map

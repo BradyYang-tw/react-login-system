@@ -41,11 +41,16 @@ const service = new user_service_1.default();
 let UserController = exports.UserController = class UserController extends tsoa_1.Controller {
     async add(requestBody) {
         this.setStatus(201); // set return status 201
-        await service.add(requestBody);
+        service.add(requestBody);
         return;
     }
-    async get(userId) {
-        return service.get(userId);
+    async getUsers() {
+        return service.getUsers();
+    }
+    async getById() {
+        // @Path() id: number,
+        // @Query() Username?: string
+        return service.getUsers();
     }
 };
 __decorate([
@@ -56,13 +61,20 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "add", null);
 __decorate([
-    (0, tsoa_1.Get)("{userId}"),
-    __param(0, (0, tsoa_1.Path)()),
+    (0, tsoa_1.Get)(),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], UserController.prototype, "get", null);
+], UserController.prototype, "getUsers", null);
+__decorate([
+    (0, tsoa_1.SuccessResponse)("200", "Success Retrive") // Custom success response
+    ,
+    (0, tsoa_1.Get)("{userId}"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getById", null);
 exports.UserController = UserController = __decorate([
-    (0, tsoa_1.Route)("users")
+    (0, tsoa_1.Route)("api/users")
 ], UserController);
 //# sourceMappingURL=user.controller.js.map

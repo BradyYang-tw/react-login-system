@@ -39,6 +39,14 @@ class UserModel {
         Object.assign(user, userData);
         await psqlConfig_1.connectionSource.manager.save(user);
     }
+    async getUsers() {
+        return user_entity_1.User.find({
+            select: {
+                Username: true,
+                Password: true,
+            },
+        });
+    }
     async getById(id) {
         return user_entity_1.User.findOneByOrFail({ id });
     }

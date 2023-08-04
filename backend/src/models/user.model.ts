@@ -43,6 +43,15 @@ export default class UserModel {
         await connectionSource.manager.save(user)
     }
 
+    public async getUsers() {
+        return User.find({
+            select: {
+                Username: true,
+                Password: true,
+            },
+        });
+    }
+
     public async getById(id: number) {
         return User.findOneByOrFail({ id });
     }

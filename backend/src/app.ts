@@ -1,6 +1,5 @@
 import express from "express";
-import routes from './routes';
-// import {RegisterRoutes} from '../build/routes';
+//import routes from './routes'; // import自己寫的route
 import cors from "cors";
 // import {errors} from 'celebrate';
 // import errorHandler from './errorHandler';
@@ -8,6 +7,7 @@ const bodyParser = require("body-parser");
 import { RegisterRoutes } from "../build/routes";
 import * as swaggerUI from "swagger-ui-express";
 import * as swaggerJson from "../build/swagger.json";
+
 // psql datasource
 import { connectionSource } from "./config/psqlConfig";
 connectionSource
@@ -45,7 +45,7 @@ app.use(
     // credentials: true, //设置成true 请求中才会带上cookie信息，否则请求失败
   })
 );
-app.use('/api', routes)
+// app.use('/api', routes)
 // app.use("/auth", authRoute);
 
 // // db connect

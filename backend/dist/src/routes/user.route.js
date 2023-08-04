@@ -8,10 +8,10 @@ const express_1 = __importDefault(require("express"));
 // import { isAuthorized } from '../middleware/passport';
 // import validate from '../validations/user.validation';
 // import {UserController} from '../controllers/user.controller';
-const user_controller_1 = __importDefault(require("../controllers/user.controller"));
+const user_controller_1 = require("../controllers/user.controller");
 const router = express_1.default.Router();
 // router.param('id', ctrl.load);
-const controller = new user_controller_1.default();
+const controller = new user_controller_1.UserController();
 router.route('/').get(function (req, res, next) {
     res.send('Hello World!');
     res.end();

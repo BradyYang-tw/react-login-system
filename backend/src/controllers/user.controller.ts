@@ -37,16 +37,23 @@ import { UserConfig } from "../utilities/interface/user";
 // }
 
 const service = new UserService();
-@Route("users")
+@Route("api/users")
 export class UserController extends Controller {
   @Post()
-  public async add(@Body() requestBody:UserConfig) {
+  public async add(@Body() requestBody:UserConfig): Promise<void> {
     this.setStatus(201); // set return status 201
-    await service.add(requestBody);
+    service.add(requestBody);
     return;
   }
+  @Get()
+  public async getUsers() {
+    return service.getUsers();
+  }
+  @SuccessResponse("200", "Success Retrive") // Custom success response
+
   @Get("{userId}")
-  public async get(@Path() userId: number) {
-    return service.get(userId);
+  public async getById(@Path() userId: number,): Promise<UserConfig> {
+    // @Query() Username?: string
+    return service.getUserById(userId);
   }
 }

@@ -7,10 +7,15 @@ const user_model_1 = __importDefault(require("../models/user.model"));
 const model = new user_model_1.default();
 class UserService {
     async add(userData) {
-        console.log('service', userData);
+        // Password base64加密
+        const buffer = Buffer.from(userData.Password, 'utf-8');
+        userData.Password = buffer.toString('base64');
         return model.add(userData);
     }
-    async get(id) {
+    async getUsers() {
+        return model.getUsers();
+    }
+    async getUserById(id) {
         return model.getById(id);
     }
 }
