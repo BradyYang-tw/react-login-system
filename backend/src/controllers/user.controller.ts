@@ -56,4 +56,18 @@ export class UserController extends Controller {
     // @Query() Username?: string
     return service.getUserById(userId);
   }
+
+  @Post("{userId}")
+  public async updateById(@Path() userId: number, @Body() requestBody:UserConfig): Promise<void> {
+    this.setStatus(201); // set return status 201
+    service.updateUserById(userId, requestBody);
+    return;
+  }
+
+  @Post("delete/{userId}")
+  public async deleteUserById(@Path() userId: number): Promise<void> {
+    this.setStatus(201); // set return status 201
+    service.deleteUserById(userId);
+    return;
+  }
 }

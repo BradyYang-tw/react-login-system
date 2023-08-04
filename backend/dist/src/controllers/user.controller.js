@@ -49,8 +49,17 @@ let UserController = exports.UserController = class UserController extends tsoa_
     }
     async getById(userId) {
         // @Query() Username?: string
-        console.log('id', userId);
         return service.getUserById(userId);
+    }
+    async updateById(userId, requestBody) {
+        this.setStatus(201); // set return status 201
+        service.updateUserById(userId, requestBody);
+        return;
+    }
+    async deleteUserById(userId) {
+        this.setStatus(201); // set return status 201
+        service.deleteUserById(userId);
+        return;
     }
 };
 __decorate([
@@ -75,6 +84,21 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getById", null);
+__decorate([
+    (0, tsoa_1.Post)("{userId}"),
+    __param(0, (0, tsoa_1.Path)()),
+    __param(1, (0, tsoa_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "updateById", null);
+__decorate([
+    (0, tsoa_1.Post)("delete/{userId}"),
+    __param(0, (0, tsoa_1.Path)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "deleteUserById", null);
 exports.UserController = UserController = __decorate([
     (0, tsoa_1.Route)("api/users")
 ], UserController);

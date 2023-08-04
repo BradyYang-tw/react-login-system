@@ -37,12 +37,15 @@ import {UserConfig} from '../utilities/interface/user';
 import { connectionSource } from "../config/psqlConfig"
 
 export default class UserModel {
+
+    // 新增使用者
     public async add(userData: UserConfig) {
         const user = new User();
         Object.assign(user, userData);
         await connectionSource.manager.save(user)
     }
 
+    // 查詢使用者
     public async getUsers() {
         return User.find({
             select: {
@@ -52,9 +55,14 @@ export default class UserModel {
             },
         });
     }
-
+     // 根據id 查詢使用者
     public async getById(id: number) {
         return User.findOneByOrFail({ id });
+    }
+    
+    // 刪除id 查詢使用者
+    public async deleteById(id: number) {
+        await User.createQueryBuilder().delete().from(User).where("id = :id", { id: id }).execute();;
     }
 
 }

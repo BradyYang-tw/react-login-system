@@ -27,6 +27,20 @@ export default class UserService {
         return userData;
     }
 
+    public async updateUserById(id: number, userData: UserConfig) {
+        const preUserData = await model.getById(id);
+        console.log("preUserData", preUserData);
+        // base64 encode
+        const buffer =  Buffer.from(userData.Password, 'utf-8');
+        userData.Password = buffer.toString('base64');
+       
+        return model.add({...preUserData, ...userData});
+    }
+
+    public async deleteUserById(id: number) {
+        await model.deleteById(id);
+    }
+
 }
 
 
